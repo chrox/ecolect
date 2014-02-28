@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-# author: binux(17175297.hk@gmail.com)
+# original author: binux(17175297.hk@gmail.com)
+# at https://github.com/binux/binux-tools/blob/master/python/chinese_digit.py
 
 class Digit(int):
     def __new__(cls, a, encoding="utf-8", *args, **kwargs):
@@ -141,7 +142,13 @@ if __name__ =="__main__":
     '十一万一千一百一十一亿一千一百二十三万四千五百六十七' : 11111111234567,
     #17 digits 亿亿
     '一亿一千一百一十一万一千一百一十一亿一千一百二十三万四千五百六十七' : 11111111111234567,
+    #18 mixed digits
+    '45万零二百': 450200,
+    #19 fractional digits
+    '28.8万': 288000,
+    #20 chinese franctional digits
+    '一千五百六十七点九万': 15679000,
     }
     
     for each in test_map:
-        assert(test_map[each] == Digit(each))
+        assert(test_map[each] == Digit(each)), "failed on %s" %each
