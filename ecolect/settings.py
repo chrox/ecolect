@@ -11,6 +11,14 @@ BOT_NAME = 'ecolect'
 SPIDER_MODULES = ['ecolect.spiders']
 NEWSPIDER_MODULE = 'ecolect.spiders'
 
+CONCURRENT_REQUESTS = 100
+LOG_LEVEL = 'INFO'
+COOKIES_ENABLED = False
+RETRY_ENABLED = False
+DOWNLOAD_TIMEOUT = 15
+REDIRECT_ENABLED = False
+AJAXCRAWL_ENABLED = True
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ecolect (+http://www.yourdomain.com)'
 
@@ -32,5 +40,6 @@ ITEM_PIPELINES = {
 }
 
 EXTENSIONS = {
+    'scrapy.contrib.corestats.CoreStats': 500,
+    'scrapy.webservice.WebService': 500,
 }
-
