@@ -286,11 +286,11 @@ class PostSpider(RedisMixin, CrawlSpider):
         # if there is no explicit lapse time we can use the last date as end date of this project
         self.dates = sorted(self.dates)
         if self.dates:
-            item["post_start_date"] = self.dates[0] + 0
+            item["post_start_date"] = str(self.dates[0] + 0)
         if self.dates and post_lapse_time:
-            item["post_end_date"] = self.dates[0] + post_lapse_time
+            item["post_end_date"] = str(self.dates[0].within(post_lapse_time))
         elif len(self.dates) > 1:
-            item["post_end_date"] = self.dates[-1] + 0
+            item["post_end_date"] = str(self.dates[-1] + 0)
         if item.get("project_investment"):
             investment = Digit(item["project_investment"])
             item["project_investment"] = investment if investment > 0 else None
