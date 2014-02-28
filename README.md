@@ -47,3 +47,12 @@ Ecolect是应用Scrapy爬虫框架编写的环评信息收集程序，可根据�
 ==============
 
 Ecolect收集的环评公告信息可通过Scrapy的Pipline存储到Mongodb或者其他数据库中。
+
+第三方函数库
+==============
+本程序还集成了许多第三方函数库，比如：
+* scrapy_redis (过滤器和请求队列的持久化，实现并发和增量抓取)
+* scrapy_mongodb （存储抓取的文档）
+* readability （Html页面正文内容提取）
+* htmltool （Html页面文本分行）
+* digit （汉语数字到阿拉伯数字的转换）
