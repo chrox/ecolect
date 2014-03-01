@@ -21,6 +21,8 @@ AJAXCRAWL_ENABLED = True
 
 LOG_LEVEL = 'INFO'
 
+RENDERJS = False
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ecolect (+http://www.yourdomain.com)'
 

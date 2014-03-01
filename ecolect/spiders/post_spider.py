@@ -30,9 +30,9 @@ class PostSpider(RedisMixin, CrawlSpider):
         RedisMixin.setup_redis(self)
 
     def __init__(self):
-        self.title_keywords = ("(工程|项目)","第?(一|二|三|首)(次|号)","(公示|公告)")
+        self.title_keywords = ("(工程|项目)", "第?(一|二|三|首)(次|号)", "(公示|公告)")
         self.line_seps = re.compile('\n|。|；')
-        self.head_seps = re.compile('_|( - )|；|(>>)')
+        self.head_seps = re.compile('_|( - )|\n|。|；|(>>)')
         self.project_name_exp = re.compile(".*?(关于)?(.*?(项目|工程))")
         self.field_regexps = {
             "project_name": {
@@ -99,8 +99,8 @@ class PostSpider(RedisMixin, CrawlSpider):
                 },
             "eia_name": {
                 'extract': [
-                        (re.compile(".*(环评|评价).*(机构|单位).?(名称)?：(.*?)\s.*"), 3),
-                        (re.compile(".*(环评|评价).*(机构|单位).?(名称)?：(.*)"), 3),
+                        (re.compile(".*(环评|评价|受理).*(机构|单位).?(名称)?：(.*?)\s.*"), 3),
+                        (re.compile(".*(环评|评价|受理).*(机构|单位).?(名称)?：(.*)"), 3),
                     ],
                 'hintextract': [
                         (re.compile(".*(机构|单位).?(名称)?：(.*?)\s.*"), 2),
@@ -166,7 +166,7 @@ class PostSpider(RedisMixin, CrawlSpider):
                 if not regex.match(title):
                     return False
             return True
-        for tag in ("h1", "h2", "h3", "h4", "title", "strong", "b"):
+        for tag in ("h1", "h2", "h3", "h4", "title", "strong", "b", "p", "span"):
             for heads in sel.xpath("//%s/text()" %tag).extract():
                 #for head in heads.strip().encode('utf-8').split(" - "):
                 for head in filter(None, self.head_seps.split(heads.encode('utf-8'))):
@@ -206,14 +206,20 @@ class PostSpider(RedisMixin, CrawlSpider):
                 for exp in exps:
                     result = exp[0].match(line)
                     if result:
-                        return result.groups()[exp[1]]
+                        try:
+                            return result.groups()[exp[1]]
+                        except:
+                            pass
             def hintextract_field(field):
                 if field in self.hintings:
                     exps = self.field_regexps[field].get("hintextract", [])
                     for exp in exps:
                         result = exp[0].match(line)
                         if result:
-                            return result.groups()[exp[1]]
+                            try:
+                                return result.groups()[exp[1]]
+                            except:
+                                pass
             def set_field(field):
                 def set_extract_field(field):
                     extract_res = extract_field(field)
