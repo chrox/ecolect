@@ -59,6 +59,7 @@ Ecolect收集的环评公告信息可通过Scrapy的Pipline存储到Mongodb或�
 本程序使用了许多第三方函数库，比如：
 * scrapy_redis (过滤器和请求队列的持久化，实现并发和增量抓取)
 * scrapy_mongodb （存储抓取的文档）
+* scrapyjs （抓取Javascript生成的页面）
 * readability （Html页面正文内容提取）
 * htmltool （Html页面文本分行）
 * digit （汉语数字到阿拉伯数字的转换）
