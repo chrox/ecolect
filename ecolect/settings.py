@@ -33,8 +33,9 @@ SCHEDULER_PERSIST = True
 #SCHEDULER_QUEUE_CLASS = "rediscrapy.queue.SpiderStack"
 
 DOWNLOAD_HANDLERS = {
-    'http': 'scrapyjs.dhandler.WebkitDownloadHandler',
-    'https': 'scrapyjs.dhandler.WebkitDownloadHandler',
+    # uncomment these lines to enable rendering page in webkit
+    #'http': 'scrapyjs.dhandler.WebkitDownloadHandler',
+    #'https': 'scrapyjs.dhandler.WebkitDownloadHandler',
 }
 
 #STATS_CLASS = 'ecolect.scrapy_graphite.RedisGraphiteStatsCollector'
