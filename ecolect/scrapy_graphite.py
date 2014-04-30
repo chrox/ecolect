@@ -22,7 +22,10 @@ class GraphiteClient(object):
     
     def __init__(self, host="127.0.0.1", port=2003):
         self._sock = socket()
-        self._sock.connect((host,port))
+        try:
+            self._sock.connect((host,port))
+        except:
+            pass
 
     def send(self, metric, value, timestamp=None):
         try:

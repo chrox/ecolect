@@ -37,7 +37,7 @@ DOWNLOAD_HANDLERS = {
     'https': 'scrapyjs.dhandler.WebkitDownloadHandler',
 }
 
-STATS_CLASS = 'ecolect.scrapy_graphite.RedisGraphiteStatsCollector'
+#STATS_CLASS = 'ecolect.scrapy_graphite.RedisGraphiteStatsCollector'
 GRAPHITE_IGNOREKEYS = []
 GRAPHITE_HOST = "localhost"
 GRAPHITE_PORT = 2003
